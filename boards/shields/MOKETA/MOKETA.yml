@@ -3,7 +3,7 @@ id: MOKETA
 name: MOKETA
 type: shield
 url: https://github.com/inpudiy/MOKETA
-requires: [ pro_micro ]
+requires: [ nice_nano_v2 ]
 features:
 - keys
 - underglow

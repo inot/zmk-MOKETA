@@ -21,4 +21,11 @@ config USB_DEVICE_MANUFACTURER
 config ZMK_CHECK_BATTERY_BEH
     bool "Enable custom &check_bat implementation"
 
+config ZMK_BLE
+    default y
+
+config ZMK_USB
+    default y
+
+
 endif
