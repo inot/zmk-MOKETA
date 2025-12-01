@@ -42,7 +42,7 @@
         lower_layer {
             bindings = <
 &none  &none      &kp N7                  &kp N8                &kp N9                  &kp N0                  &kp RIGHT_PARENTHESIS  &kp LEFT_PARENTHESIS  &kp ASTERISK        &kp AMPERSAND          &none  &check_bat
-&none  &kp EQUAL  &hrm LEFT_ALT NUMBER_4  &hrm LEFT_CONTROL N5  &hrm LEFT_GUI NUMBER_6  &none                   &none                  &hrm RIGHT_GUI CARET  &hrm RCTRL PERCENT  &hrm RIGHT_ALT DOLLAR  &none  &none
+&none  &kp EQUAL  &hrm LEFT_ALT NUMBER_4  &hrm LEFT_CONTROL N5  &hrm LEFT_GUI NUMBER_6  &kp N0                  &none                  &hrm RIGHT_GUI CARET  &hrm RCTRL PERCENT  &hrm RIGHT_ALT DOLLAR  &none  &none
 &none  &kp MINUS  &kp NUMBER_1            &kp NUMBER_2          &kp NUMBER_3            &none                   &none                  &kp EXCLAMATION       &kp AT_SIGN         &kp HASH               &none  &none
                                                                 &lt ADJ TAB             &trans  &trans  &trans  &trans                 &lt ADJ DEL
             >;
