@@ -26,6 +26,7 @@
 #include <zmk/usb.h>
 #include <zmk/workqueue.h>
 #include <zmk/check_battery.h>
+#include <zmk/events/layer_state_changed.h>
 
 LOG_MODULE_DECLARE(zmk, CONFIG_ZMK_LOG_LEVEL);
 
@@ -54,6 +55,10 @@ struct Led {
     const struct device *dev;
     uint32_t id;
 };
+
+// Layer indices (keep in sync with keymap: DEF=0, LWR=1, RSE=2)
+#define LAYER_LOWER 1
+#define LAYER_RAISE 2
 
 // Enumeration for LEDs
 typedef enum {
@@ -92,6 +97,24 @@ struct k_work_q animation_work_q;
 static inline void set_individual_led_brightness(LedType led, uint8_t brightness) {
     led_set_brightness(individual_leds[led].dev, individual_leds[led].id, brightness);
     led_brightness[led] = brightness;  // Store the brightness value
+}
+
+// Simple layer indicator: LED_1 for LOWER, LED_2 for RAISE
+static void update_layer_leds(void) {
+    bool lower_active = zmk_keymap_layer_active(LAYER_LOWER);
+    bool raise_active = zmk_keymap_layer_active(LAYER_RAISE);
+
+    if (lower_active) {
+        led_on(individual_leds[LED_1].dev, individual_leds[LED_1].id);
+    } else {
+        led_off(individual_leds[LED_1].dev, individual_leds[LED_1].id);
+    }
+
+    if (raise_active) {
+        led_on(individual_leds[LED_2].dev, individual_leds[LED_2].id);
+    } else {
+        led_off(individual_leds[LED_2].dev, individual_leds[LED_2].id);
+    }
 }
 
 void turn_off_all_leds() {
@@ -272,6 +295,19 @@ K_WORK_DELAYABLE_DEFINE(usb_conn_work, usb_connection_handler);
 ZMK_LISTENER(usb_conn_state_listener, usb_connection_listener)
 ZMK_SUBSCRIPTION(usb_conn_state_listener, zmk_usb_conn_state_changed);
 
+// Layer state listener: updates simple layer LEDs on each layer change
+int layer_state_listener(const zmk_event_t *eh) {
+    const struct zmk_layer_state_changed *ev = as_zmk_layer_state_changed(eh);
+    if (!ev) {
+        return ZMK_EV_EVENT_BUBBLE;
+    }
+
+    update_layer_leds();
+    return ZMK_EV_EVENT_BUBBLE;
+}
+
+ZMK_LISTENER(layer_state_status, layer_state_listener)
+ZMK_SUBSCRIPTION(layer_state_status, zmk_layer_state_changed);
 
 #if IS_ENABLED(CONFIG_ZMK_CHECK_BATTERY_BEH)
 #else
