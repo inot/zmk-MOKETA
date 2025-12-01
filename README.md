@@ -107,23 +107,23 @@ Assume you add a new layer in the keymap (for example `GAM`):
 
        // LOWER → LED_1
        if (lower_active) {
-           led_on(individual_leds[LED_1].dev, individual_leds[LED_1].id);
+           set_individual_led_brightness(LED_1, LED_STATUS_ON);
        } else if (!game_active) {
            // Do not override if GAME uses this LED as part of a combination
-           led_off(individual_leds[LED_1].dev, individual_leds[LED_1].id);
+           set_individual_led_brightness(LED_1, LED_STATUS_OFF);
        }
 
        // RAISE → LED_2
        if (raise_active) {
-           led_on(individual_leds[LED_2].dev, individual_leds[LED_2].id);
+           set_individual_led_brightness(LED_2, LED_STATUS_ON);
        } else if (!game_active) {
-           led_off(individual_leds[LED_2].dev, individual_leds[LED_2].id);
+           set_individual_led_brightness(LED_2, LED_STATUS_OFF);
        }
 
        // GAME layer → combination of LEDs (here LED_1 + LED_2)
        if (game_active) {
-           led_on(individual_leds[LED_1].dev, individual_leds[LED_1].id);
-           led_on(individual_leds[LED_2].dev, individual_leds[LED_2].id);
+           set_individual_led_brightness(LED_1, LED_STATUS_ON);
+           set_individual_led_brightness(LED_2, LED_STATUS_ON);
        }
    }
    ```
