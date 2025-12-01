@@ -17,7 +17,7 @@
 
 ## Layer LED indication
 
-The shield has 4 discrete status LEDs driven via `boards/shields/MOKETA/src/status_led.c`.
+The shield has 4 discrete status LEDs driven via `boards/shields/MOKETA/src/status_led.c`. Brightness for both animations and layer indicators is controlled by the `LED_STATUS_ON` / `LED_STATUS_OFF` macros in that file.
 
 Currently:
 
@@ -74,23 +74,25 @@ Assume you add a new layer in the keymap (for example `GAM`):
 
 3. **Extend `update_layer_leds()`**
 
-   The function already handles `LOWER` and `RAISE`:
+   The function already handles `LOWER` and `RAISE` using `set_individual_led_brightness()` and `LED_STATUS_ON` / `LED_STATUS_OFF`:
 
    ```c
    static void update_layer_leds(void) {
        bool lower_active = zmk_keymap_layer_active(LAYER_LOWER);
        bool raise_active = zmk_keymap_layer_active(LAYER_RAISE);
 
+       // LOWER → LED_1
        if (lower_active) {
-           led_on(individual_leds[LED_1].dev, individual_leds[LED_1].id);
+           set_individual_led_brightness(LED_1, LED_STATUS_ON);
        } else {
-           led_off(individual_leds[LED_1].dev, individual_leds[LED_1].id);
+           set_individual_led_brightness(LED_1, LED_STATUS_OFF);
        }
 
+       // RAISE → LED_2
        if (raise_active) {
-           led_on(individual_leds[LED_2].dev, individual_leds[LED_2].id);
+           set_individual_led_brightness(LED_2, LED_STATUS_ON);
        } else {
-           led_off(individual_leds[LED_2].dev, individual_leds[LED_2].id);
+           set_individual_led_brightness(LED_2, LED_STATUS_OFF);
        }
    }
    ```
