@@ -25,6 +25,17 @@
             flavor = "balanced";
             quick-tap-ms = <150>;
         };
+
+        boot_esc: boot_esc {
+            compatible = "zmk,behavior-hold-tap";
+            label = "boot_esc";
+            bindings = <&kp>, <&bootloader>;
+
+            #binding-cells = <1>;
+            tapping-term-ms = <1000>;
+            flavor = "balanced";
+            quick-tap-ms = <150>;
+        };
     };
 
     keymap {
@@ -65,9 +76,9 @@
         // |       |        |        |        |  LALT  |        |       |       |        |        |        |        |        |       |
         raise_layer {
             bindings = <
-            &trans     &kp F1    &kp F2           &kp F3   &kp F4     &kp F5                  &kp F6     &kp F7    &kp F8       &kp F9         &kp F10       &trans
-            &kp F12    &kp N1    &kp N2           &kp N3   &kp N4     &kp N5                  &kp N6     &kp N7    &kp N8       &kp N9         &kp N0        &kp F11
-            &trans     &kp EQUAL &mt UNDER MINUS  &kp PLUS &kp LBRC   &kp RBRC                &kp LBKT   &kp RBKT  &kp C_VOL_DN &kp C_VOL_UP   &kp BACKSLASH &kp GRAVE 
+            &boot_esc ESC &kp F1    &kp F2           &kp F3   &kp F4     &kp F5                  &kp F6     &kp F7    &kp F8       &kp F9         &kp F10       &trans
+            &kp F12       &kp N1    &kp N2           &kp N3   &kp N4     &kp N5                  &kp N6     &kp N7    &kp N8       &kp N9         &kp N0        &kp F11
+            &trans        &kp EQUAL &mt UNDER MINUS  &kp PLUS &kp LBRC   &kp RBRC                &kp LBKT   &kp RBKT  &kp C_VOL_DN &kp C_VOL_UP   &kp BACKSLASH &kp GRAVE 
                                                            &kp LALT   &trans  &trans   &trans &trans     &trans    
             >;
         };
