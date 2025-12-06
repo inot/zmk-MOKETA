@@ -65,7 +65,12 @@ static void set_rgb_led_color(uint32_t led_index, uint8_t r, uint8_t g, uint8_t 
     if (rgb_dev && device_is_ready(rgb_dev)) {
         LOG_DBG("Setting LED color");
         uint8_t color[3] = {r, g, b};
-        led_set_color(rgb_dev, led_index, 3, color);
+        int ret = led_set_color(rgb_dev, led_index, 3, color);
+        if (ret) {
+            LOG_ERR("Failed to set LED color, error: %d", ret);
+        } else {
+            LOG_DBG("LED color set successfully");
+        }
     } else {
         LOG_DBG("RGB device not ready or not available");
     }
