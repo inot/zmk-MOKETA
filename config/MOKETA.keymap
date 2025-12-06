@@ -37,24 +37,24 @@
         // |       |      |      |      |LCTRL |RAISE |  SPACE    | ENT/SHIFT | LOWER |BKSPC |      |      |       |       |
         default_layer {
             bindings = <
-            &none          &kp Q  &kp W    &kp E    &kp R      &kp T                               &kp Y      &kp U         &kp I     &kp O     &kp P     &mo ADJ
-            &mt LSHIFT ESC &kp A  &kp S    &kp D    &kp F      &kp G                               &kp H      &kp J         &kp K     &kp L     &kp SEMI  &kp LBKT
-            &mt LGUI TAB   &kp Z  &kp X    &kp C    &kp V      &kp B                               &kp N      &kp M         &kp COMMA &kp DOT   &kp FSLH  &kp SQT
-                                                    &kp LCTRL  &mo RSE   &kp SPACE &mt RSHFT ENTER &mo LWR    &kp BACKSPACE
+            &kp ESC  &kp Q  &kp W    &kp E    &kp R      &kp T                               &kp Y      &kp U         &kp I     &kp O     &kp P     &mo ADJ
+            &kp TAB  &kp A  &kp S    &kp D    &kp F      &kp G                               &kp H      &kp J         &kp K     &kp L     &kp SEMI  &kp LBKT
+            &kp LGUI &kp Z  &kp X    &kp C    &kp V      &kp B                               &kp N      &kp M         &kp COMMA &kp DOT   &kp FSLH  &kp SQT
+                                              &kp LCTRL  &mo RSE   &kp SPACE &mt RSHFT ENTER &mo LWR    &kp BACKSPACE
             >;
         };
 
         // -----------------------------------------------------------------------------------------------------------------------
-        // |OUT_TG| BT0  | BT1  | BT2  | BT3  | BT_CLR   |-----------|-----------|PG_UP  |LGUI(TAB)| UP   |       |      |      |
-        // |      |      |      |      |      |CAPSLOCK  |-----------|-----------|PG_DN  | LEFT    | DOWN | RIGHT |      |      |
-        // |      |      | CUT  | COPY |PASTE |          |-----------|-----------| HOME  |         | END  |       |      |      |
-        // |      |      |      |      |      |          |           |           |       | LGUI(SP)|      |       |      | DEL  |
+        // |OUT_TG| BT0  | BT1  | BT2  | BT3  | BT_CLR   |-----------|-----------| PG_UP |LGUI(TAB)| UP   |       |      | lock |
+        // |      |      |      |      |      | CAPSLOCK |-----------|-----------| PG_DN | LEFT    | DOWN | RIGHT |      |      |
+        // |      |      | CUT  | COPY | PASTE|          |-----------|-----------| HOME  |         | END  |       |      |      |
+        // |      |      |      |      |      | LGUI(SP) |           |           |       |         |      |       |      | DEL  |
         lower_layer {
             bindings = <
-            &out OUT_TOG &bt BT_SEL 0   &bt BT_SEL 1 &bt BT_SEL 2 &bt BT_SEL 3 &bt BT_CLR                    &kp PAGE_UP     &kp LG(TAB) &kp UP    &trans     &trans     &trans
-            &trans       &trans         &trans       &trans       &trans       &kp CAPSLOCK                  &kp PAGE_DOWN   &kp LEFT    &kp DOWN  &kp RIGHT  &trans     &trans
-            &trans       &trans         &kp K_CUT    &kp K_COPY   &kp K_PASTE  &trans                        &trans          &kp HOME    &trans    &kp END    &trans     &trans
-                                                                  &trans       &kp LG(SPACE) &trans  &trans  &trans          &kp DELETE  
+            &out OUT_TOG     &bt BT_SEL 0     &bt BT_SEL 1     &bt BT_SEL 2     &bt BT_SEL 3     &bt BT_CLR                      &kp PAGE_UP     &kp LG(TAB) &kp UP    &trans     &trans     &kp LG(L)     
+            &rgb_ug RGB_HUI  &rgb_ug RGB_SPD  &rgb_ug RGB_SPI  &rgb_ug RGB_EFR  &rgb_ug RGB_EFF  &kp CAPSLOCK                    &kp PAGE_DOWN   &kp LEFT    &kp DOWN  &kp RIGHT  &trans     &trans
+            &rgb_ug RGB_TOG  &rgb_ug RGB_BRD  &rgb_ug RGB_BRI  &rgb_ug RGB_SAD  &rgb_ug RGB_SAI  &rgb_ug RGB_HUD                 &trans          &kp HOME    &trans    &kp END    &trans     &trans
+                                                                                &trans           &kp LG(SPACE)   &trans  &trans  &trans          &kp DELETE  
             >;
         };
 
