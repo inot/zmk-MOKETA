@@ -27,6 +27,7 @@
 #include <zmk/workqueue.h>
 #include <zmk/check_battery.h>
 #include <zmk/events/layer_state_changed.h>
+#include <zmk/layer_led.h>
 
 LOG_MODULE_DECLARE(zmk, CONFIG_ZMK_LOG_LEVEL);
 
@@ -56,9 +57,17 @@ struct Led {
     uint32_t id;
 };
 
-// Layer indices (keep in sync with keymap: DEF=0, LWR=1, RSE=2)
+// Layer indices (keep in sync with keymap: WOW=1, FPS=2, LWR=3, RSE=4)
+#define LAYER_WOW 1
+#define LAYER_FPS 2
 #define LAYER_LOWER 3
 #define LAYER_RAISE 4
+
+// Make these available for layer_led.c
+int LAYER_WOW = 1;
+int LAYER_FPS = 2;
+int LAYER_LOWER = 3;
+int LAYER_RAISE = 4;
 
 // Enumeration for LEDs
 typedef enum {
@@ -99,24 +108,9 @@ static inline void set_individual_led_brightness(LedType led, uint8_t brightness
     led_brightness[led] = brightness;  // Store the brightness value
 }
 
-// Simple layer indicator: LED_1 for LOWER, LED_2 for RAISE
-static void update_layer_leds(void) {
-    bool lower_active = zmk_keymap_layer_active(LAYER_LOWER);
-    bool raise_active = zmk_keymap_layer_active(LAYER_RAISE);
-
-    // LOWER → LED_1
-    if (lower_active) {
-        set_individual_led_brightness(LED_1, LED_STATUS_ON);
-    } else {
-        set_individual_led_brightness(LED_1, LED_STATUS_OFF);
-    }
-
-    // RAISE → LED_2
-    if (raise_active) {
-        set_individual_led_brightness(LED_2, LED_STATUS_ON);
-    } else {
-        set_individual_led_brightness(LED_2, LED_STATUS_OFF);
-    }
+// Make this available for layer_led.c
+void set_individual_led_brightness(int led, uint8_t brightness) {
+    set_individual_led_brightness((LedType)led, brightness);
 }
 
 void turn_off_all_leds() {
