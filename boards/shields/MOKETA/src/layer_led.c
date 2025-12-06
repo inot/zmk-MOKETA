@@ -94,7 +94,6 @@ static void turn_on_rgb_leds_for_lwr_layer(bool lwr_active) {
         set_rgb_led_color(LED_L_INDEX, 0, 0, 0); // Черный (выключено)
     }
 }
-#endif
 
 // LED status definitions
 #define LED_STATUS_ON 100
@@ -146,4 +145,7 @@ void update_layer_leds(void) {
     LOG_DBG("LWR layer active: %d", lwr_active);
     turn_on_rgb_leds_for_lwr_layer(lwr_active);
 #endif
-}
+
+
+ZMK_LISTENER(layer_led_listener, layer_state_listener)
+ZMK_SUBSCRIPTION(layer_led_listener, zmk_layer_state_changed);
