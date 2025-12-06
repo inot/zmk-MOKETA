@@ -63,6 +63,7 @@ int LAYER_WOW = 1;
 int LAYER_FPS = 2;
 int LAYER_LOWER = 3;
 int LAYER_RAISE = 4;
+int LAYER_LWR = 3;
 
 // Enumeration for LEDs
 typedef enum {
