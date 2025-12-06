@@ -57,13 +57,12 @@ struct Led {
     uint32_t id;
 };
 
-// Layer indices (keep in sync with keymap: WOW=1, FPS=2, LWR=3, RSE=4)
+// Layer indices (keep in sync with keymap: DEF=0, WOW=1, FPS=2, LWR=3, RSE=4)
 // Make these available for layer_led.c
 int LAYER_WOW = 1;
 int LAYER_FPS = 2;
-int LAYER_LOWER = 3;
-int LAYER_RAISE = 4;
 int LAYER_LWR = 3;
+int LAYER_RAISE = 4;
 
 // Enumeration for LEDs
 typedef enum {
