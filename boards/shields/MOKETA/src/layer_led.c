@@ -24,23 +24,33 @@ extern int LAYER_RAISE;
 extern int LAYER_LWR;
 
 // RGB device and LED indices for IJKL keys
-#if DT_NODE_EXISTS(DT_NODELABEL(led_strip))
-static const struct device *rgb_dev = DEVICE_DT_GET(DT_NODELABEL(led_strip));
-#define LED_I_INDEX 20  // Индекс светодиода под кнопкой I
-#define LED_J_INDEX 31  // Индекс светодиода под кнопкой J
-#define LED_K_INDEX 32  // Индекс светодиода под кнопкой K
-#define LED_L_INDEX 33  // Индекс светодиода под кнопкой L
+#if DT_NODE_EXISTS(DT_CHOSEN(zmk_underglow))
+static const struct device *rgb_dev = DEVICE_DT_GET(DT_CHOSEN(zmk_underglow));
+#define LED_I_INDEX 0  // Тестовый индекс светодиода
+#define LED_J_INDEX 1  // Тестовый индекс светодиода
+#define LED_K_INDEX 2  // Тестовый индекс светодиода
+#define LED_L_INDEX 3  // Тестовый индекс светодиода
 #define RGB_AVAILABLE 1
+LOG_INF("RGB device is available");
 #else
 #define RGB_AVAILABLE 0
+LOG_INF("RGB device is not available");
 #endif
 
 #if RGB_AVAILABLE
 static void init_rgb_device(void) {
-    if (rgb_dev && device_is_ready(rgb_dev)) {
-        LOG_INF("RGB device initialized successfully");
+    LOG_INF("Attempting to initialize RGB device");
+    LOG_INF("rgb_dev = %p", rgb_dev);
+    if (rgb_dev) {
+        LOG_INF("RGB device pointer is not NULL");
+        if (device_is_ready(rgb_dev)) {
+            LOG_INF("RGB device is ready");
+            LOG_INF("RGB device initialized successfully");
+        } else {
+            LOG_ERR("RGB device is not ready");
+        }
     } else {
-        LOG_ERR("Failed to initialize RGB device");
+        LOG_ERR("RGB device pointer is NULL");
     }
 }
 
@@ -60,16 +70,24 @@ static void turn_on_rgb_leds_for_lwr_layer(bool lwr_active) {
     if (lwr_active) {
         // Включаем светодиоды зеленым цветом
         LOG_DBG("Turning on RGB LEDs for IJKL keys");
+        LOG_DBG("Setting LED_I_INDEX (%d) to green", LED_I_INDEX);
         set_rgb_led_color(LED_I_INDEX, 0, 255, 0); // Зеленый
+        LOG_DBG("Setting LED_J_INDEX (%d) to green", LED_J_INDEX);
         set_rgb_led_color(LED_J_INDEX, 0, 255, 0); // Зеленый
+        LOG_DBG("Setting LED_K_INDEX (%d) to green", LED_K_INDEX);
         set_rgb_led_color(LED_K_INDEX, 0, 255, 0); // Зеленый
+        LOG_DBG("Setting LED_L_INDEX (%d) to green", LED_L_INDEX);
         set_rgb_led_color(LED_L_INDEX, 0, 255, 0); // Зеленый
     } else {
         // Выключаем светодиоды
         LOG_DBG("Turning off RGB LEDs for IJKL keys");
+        LOG_DBG("Setting LED_I_INDEX (%d) to black", LED_I_INDEX);
         set_rgb_led_color(LED_I_INDEX, 0, 0, 0); // Черный (выключено)
+        LOG_DBG("Setting LED_J_INDEX (%d) to black", LED_J_INDEX);
         set_rgb_led_color(LED_J_INDEX, 0, 0, 0); // Черный (выключено)
+        LOG_DBG("Setting LED_K_INDEX (%d) to black", LED_K_INDEX);
         set_rgb_led_color(LED_K_INDEX, 0, 0, 0); // Черный (выключено)
+        LOG_DBG("Setting LED_L_INDEX (%d) to black", LED_L_INDEX);
         set_rgb_led_color(LED_L_INDEX, 0, 0, 0); // Черный (выключено)
     }
 }
@@ -80,6 +98,7 @@ static void turn_on_rgb_leds_for_lwr_layer(bool lwr_active) {
 #define LED_STATUS_OFF 0
 
 void update_layer_leds(void) {
+    LOG_DBG("update_layer_leds called");
 #if RGB_AVAILABLE
     static bool initialized = false;
     if (!initialized) {

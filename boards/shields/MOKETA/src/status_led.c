@@ -65,6 +65,9 @@ int LAYER_LOWER = 3;
 int LAYER_RAISE = 4;
 int LAYER_LWR = 3;
 
+#include <zephyr/logging/log.h>
+LOG_MODULE_DECLARE(zmk, CONFIG_ZMK_LOG_LEVEL);
+
 // Enumeration for LEDs
 typedef enum {
     LED_1,
@@ -294,6 +297,7 @@ int layer_state_listener(const zmk_event_t *eh) {
         return ZMK_EV_EVENT_BUBBLE;
     }
 
+    LOG_DBG("layer_state_listener called, layer %d is now %s", ev->layer, ev->state ? "active" : "inactive");
     update_layer_leds();
     return ZMK_EV_EVENT_BUBBLE;
 }
