@@ -76,7 +76,7 @@
         // |       |        |        |        |  LALT  |        |       |       |        |        |        |        |        |       |
         raise_layer {
             bindings = <
-            &boot_esc ESC ESC &kp F1    &kp F2           &kp F3   &kp F4     &kp F5                  &kp F6     &kp F7    &kp F8       &kp F9         &kp F10       &trans
+            &boot_esc ESC 0   &kp F1    &kp F2           &kp F3   &kp F4     &kp F5                  &kp F6     &kp F7    &kp F8       &kp F9         &kp F10       &trans
             &kp F12           &kp N1    &kp N2           &kp N3   &kp N4     &kp N5                  &kp N6     &kp N7    &kp N8       &kp N9         &kp N0        &kp F11
             &trans            &kp EQUAL &mt UNDER MINUS  &kp PLUS &kp LBRC   &kp RBRC                &kp LBKT   &kp RBKT  &kp C_VOL_DN &kp C_VOL_UP   &kp BACKSLASH &kp GRAVE 
                                                            &kp LALT   &trans  &trans   &trans &trans     &trans    
