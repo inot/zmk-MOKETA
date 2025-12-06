@@ -43,13 +43,30 @@ static void set_rgb_led_color(uint32_t led_index, uint8_t r, uint8_t g, uint8_t 
     LOG_DBG("set_rgb_led_color called: led_index=%d, r=%d, g=%d, b=%d", led_index, r, g, b);
     if (rgb_dev && device_is_ready(rgb_dev)) {
         LOG_DBG("Setting LED color");
-        // Попробуем использовать функцию led_set_color из Zephyr
-        uint8_t color[3] = {r, g, b};
-        int ret = led_set_color(rgb_dev, led_index, 3, color);
-        if (ret) {
-            LOG_ERR("Failed to set LED color, error: %d", ret);
+        // Если цвет черный (выключено), используем led_off
+        if (r == 0 && g == 0 && b == 0) {
+            int ret = led_off(rgb_dev, led_index);
+            if (ret) {
+                LOG_ERR("Failed to turn off LED, error: %d", ret);
+            } else {
+                LOG_DBG("LED turned off successfully");
+            }
         } else {
-            LOG_DBG("LED color set successfully");
+            // Для цветных светодиодов используем led_set_color
+            uint8_t color[3] = {r, g, b};
+            int ret = led_set_color(rgb_dev, led_index, 3, color);
+            if (ret) {
+                LOG_ERR("Failed to set LED color, error: %d", ret);
+                // Если led_set_color не работает, попробуем led_on
+                ret = led_on(rgb_dev, led_index);
+                if (ret) {
+                    LOG_ERR("Failed to turn on LED, error: %d", ret);
+                } else {
+                    LOG_DBG("LED turned on successfully");
+                }
+            } else {
+                LOG_DBG("LED color set successfully");
+            }
         }
     } else {
         LOG_DBG("RGB device not ready or not available");
@@ -134,7 +151,7 @@ void update_layer_leds(void) {
     // LWR layer RGB control
 #if RGB_AVAILABLE
     LOG_DBG("LWR layer active: %d", lwr_active);
-    // turn_on_rgb_leds_for_lwr_layer(lwr_active); // Временно отключено для проверки работы обычных светодиодов
+    turn_on_rgb_leds_for_lwr_layer(lwr_active);
 #endif
 }
 
