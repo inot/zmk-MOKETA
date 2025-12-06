@@ -148,5 +148,5 @@ void update_layer_leds(void) {
     LOG_DBG("LWR layer active: %d", lwr_active);
     turn_on_rgb_leds_for_lwr_layer(lwr_active);
 #endif
-
+}
 
