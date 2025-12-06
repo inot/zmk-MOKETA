@@ -42,12 +42,11 @@
 
     keymap {
         compatible = "zmk,keymap";
-
-        // -----------------------------------------------------------------------------------------------------------------
-        // |  ESC  |  Q   |  W   |  E   |  R   |  T   |-----------|-----------|   Y   |  U   |  I   |  O   |   P   |  ADJ  |
-        // |  TAB  |  A   |  S   |  D   |  F   |  G   |-----------|-----------|   H   |  J   |  K   |  L   |   ;   |  [    |
-        // |  GUI  |  Z   |  X   |  C   |  V   |  B   |-----------|-----------|   N   |  M   |  ,   |  .   |   /   |  '    |
-        // -----------------------------|LCTRL | RSE  |  SPACE    | ENT/SHIFT | LWR   |BKSPC |------------------------------
+            // -----------------------------------------------------------------------------------------------------------------
+            // |  ESC  |  Q   |  W   |  E   |  R   |  T   |-----------|-----------|   Y   |  U   |  I   |  O   |   P   |  LALT |
+            // |  TAB  |  A   |  S   |  D   |  F   |  G   |-----------|-----------|   H   |  J   |  K   |  L   |   ;   |  LBKT |
+            // | LGUI  |  Z   |  X   |  C   |  V   |  B   |-----------|-----------|   N   |  M   |  ,   |  .   |   /   |  SQT  |
+            // -----------------------------|LCTRL | RSE  |  SPACE    | ENT/SHIFT | LWR   | BACKSPACE |-------------------------
         default_layer {
             bindings = <
             &kp ESC  &kp Q  &kp W    &kp E    &kp R      &kp T                               &kp Y      &kp U         &kp I     &kp O     &kp P     &kp LALT
@@ -56,12 +55,11 @@
                                               &kp LCTRL  &mo RSE   &kp SPACE &mt RSHFT ENTER &mo LWR    &kp BACKSPACE
             >;
         };
-        wow {
             // ---------------------------------------------------------------------------------------------------------------
-            // |  ESC  |  Q   |  W   |  E   |  R   |  T     |-------|-------|   Y   |  U    |  I   |  O   |   P   |  [       |
-            // | TAB   |  A   |  S   |  D   |  F   |  G     |-------|-------|   H   |  J    |  K   |  L   |   ;   |  '       |
-            // | SHIFT |  Z   |  X   |  C   |  V   |  B     |-------|-------|   N   |  M    |  ,   |  .   |   /   | ENT/SHIFT|
-            // -----------------------------|  9   |  7     | SPACE | ENTER | LOWER |BKSPACE|---------------------------------
+            // |  ESC  |  Q   |  W   |  E   |  R   |  T     |-------|-------|   Y   |  U    |  I   |  O   |   P   |  LBKT    |
+            // | TAB   |  A   |  S   |  D   |  F   |  G     |-------|-------|   H   |  J    |  K   |  L   |   ;   |  SQT     |
+            // | LSHFT |  Z   |  X   |  C   |  V   |  B     |-------|-------|   N   |  M    |  ,   |  .   |   /   | ENT/SHIFT|
+            // -----------------------------|  N9  |  N7    | SPACE | ENTER | LOWER | BACKSPACE|-----------------------------
             bindings = <
                 &kp ESC    &kp Q  &kp W    &kp E    &kp R      &kp T                               &kp Y      &kp U          &kp I     &kp O     &kp P     &kp LBKT
                 &kp TAB    &kp A  &kp S    &kp D    &kp F      &kp G                               &kp H      &kp J          &kp K     &kp L     &kp SEMI  &kp SQT
@@ -71,12 +69,11 @@
         };        
         
 
-        fps {
             // ---------------------------------------------------------------------------------------------------------------
-            // |  ESC  |  Q   |  W   |  E   |  R   |  T     |-------|-------|   Y   |  U    |  I   |  O   |   P   |  [       |
-            // | TAB   |  A   |  S   |  D   |  F   |  G     |-------|-------|   H   |  J    |  K   |  L   |   ;   |  '       |
-            // | SHIFT |  Z   |  X   |  C   |  V   |  B     |-------|-------|   N   |  M    |  ,   |  .   |   /   | ENT/SHIFT|
-            // -----------------------------|  M   |  LCTRL | SPACE | ENTER | LOWER |  LALT |---------------------------------
+            // |  ESC  |  Q   |  W   |  E   |  R   |  T     |-------|-------|   Y   |  U    |  I   |  O   |   P   |  LBKT    |
+            // | TAB   |  A   |  S   |  D   |  F   |  G     |-------|-------|   H   |  J    |  K   |  L   |   ;   |  SQT     |
+            // | LSHFT |  Z   |  X   |  C   |  V   |  B     |-------|-------|   N   |  M    |  ,   |  .   |   /   | ENT/SHIFT|
+            // -----------------------------|  M   |  LCTRL | SPACE | ENTER | LOWER |  F1   |---------------------------------
             bindings = <
                 &kp ESC   &kp Q  &kp W    &kp E    &kp R      &kp T                           &kp Y      &kp U          &kp I     &kp O     &kp P     &kp LBKT
                 &kp TAB   &kp A  &kp S    &kp D    &kp F      &kp G                           &kp H      &kp J          &kp K     &kp L     &kp SEMI  &kp SQT
@@ -86,10 +83,10 @@
         }; 
 
         // ---------------------------------------------------------------------------------------------------------------------------------------
-        // |OUT_TG   |   BT0   |   BT1   |   BT2   |  BT3    | BT_CLR    |-----------|-----------| PG_UP |LGUI(TAB)|  UP  |       |      |      |
+        // | OUT_TG  |   BT0   |   BT1   |   BT2   |  BT3    | BT_CLR    |-----------|-----------| PG_UP |LGUI(TAB)|  UP  |       |      |      |
         // | RGB HUI | RGB SPD | RGB SPI | RGB EFR | RGB EFF | CAPSLOCK  |-----------|-----------| PG_DN |  LEFT   | DOWN | RIGHT |      |      |
-        // | RGB TG  | RGB BRD | RGB BRI | RGB SAD | RGB SAI | RGB HUD   |-----------|-----------| HOME  |         | END  |       |      |      |
-        // ----------------------------------------|         |LGUI(SPACE)|           |           |       |         |-----------------------------
+        // | RGB TG  | RGB BRD | RGB BRI | RGB SAD | RGB SAI | RGB HUD   |-----------|-----------|       |  HOME   |      |  END  |      |      |
+        // ----------------------------------------|         |LGUI(SPACE)|           |           |       | DELETE  |-----------------------------
         lower_layer {
             bindings = <
             &out OUT_TOG     &bt BT_SEL 0     &bt BT_SEL 1     &bt BT_SEL 2     &bt BT_SEL 3     &bt BT_CLR                      &kp PAGE_UP     &kp LG(TAB) &kp UP    &trans     &trans     &trans     
@@ -100,9 +97,9 @@
         };
 
         // --------------------------------------------------------------------------------------------------------------------------
-        // |ESC/BT|  F1    |  F2    |  F3    |  F3    |  F5    |-------|-------|  F6    |  F7    |  F8    |  F9    |  F10   |       |
-        // |  F12 |   1    |   2    |   3    |   4    |   5    |-------|-------|   6    |   7    |   8    |   9    |   0    |  F11  |
-        // |      |   =    |  -/_   |   +    |   {    |   }    |-------|-------|   [    |   ]    | VOL-   | VOL+   |   \    |  `    |
+        // |ESC/BT|  F1    |  F2    |  F3    |  F4    |  F5    |-------|-------|  F6    |  F7    |  F8    |  F9    |  F10   |       |
+        // |  F12 |   N1   |   N2   |   N3   |   N4   |   N5   |-------|-------|   N6   |   N7   |   N8   |   N9   |   N0   |  F11  |
+        // |      |   =    |  -/_   |   +    | LBRC   | RBRC   |-------|-------| LBKT   | RBKT   | VOL-   | VOL+   |   \    |  `    |
         // ----------------------------------|  LALT  |        |       |       |        |        |-----------------------------------
         raise_layer {
             bindings = <
