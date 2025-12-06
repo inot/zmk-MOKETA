@@ -98,14 +98,14 @@ K_THREAD_STACK_DEFINE(animation_work_q_stack, ANIMATION_WORK_Q_STACK_SIZE);
 struct k_work_q animation_work_q;
 
 // Helper function to set brightness of individual LED
-static inline void set_individual_led_brightness(LedType led, uint8_t brightness) {
+static inline void set_individual_led_brightness_internal(LedType led, uint8_t brightness) {
     led_set_brightness(individual_leds[led].dev, individual_leds[led].id, brightness);
     led_brightness[led] = brightness;  // Store the brightness value
 }
 
 // Make this available for layer_led.c
 void set_individual_led_brightness(int led, uint8_t brightness) {
-    set_individual_led_brightness((LedType)led, brightness);
+    set_individual_led_brightness_internal((LedType)led, brightness);
 }
 
 void turn_off_all_leds() {
@@ -119,7 +119,7 @@ void turn_off_all_leds() {
 static void fade_in_led(LedType led, uint32_t duration_ms) {
     uint32_t step_delay = duration_ms / LED_FADE_STEPS;
     for (int i = 0; i <= LED_FADE_STEPS; i++) {
-        set_individual_led_brightness(led, LED_STATUS_ON * i / LED_FADE_STEPS);
+        set_individual_led_brightness_internal(led, LED_STATUS_ON * i / LED_FADE_STEPS);
         k_msleep(step_delay);
     }
     return;
@@ -134,7 +134,7 @@ void fade_out_all_leds(uint32_t duration_ms) {
     for (int j = LED_FADE_STEPS; j >= 0; j--) {
         for (int i = 0; i < LED_COUNT; i++) {
             uint8_t current_brightness = get_led_brightness(i);
-            set_individual_led_brightness(i, current_brightness * j / LED_FADE_STEPS);
+            set_individual_led_brightness_internal(i, current_brightness * j / LED_FADE_STEPS);
         }
         k_msleep(step_delay);
     }
@@ -147,7 +147,7 @@ void smooth_blink_leds(uint8_t led_mask, int count, uint32_t duration_ms) {
         for (int j = 0; j <= LED_FADE_STEPS; j++) {
             for (int k = 0; k < LED_COUNT; k++) {
                 if (led_mask & (1 << (LED_COUNT - 1 - k))) {
-                    set_individual_led_brightness(k, LED_STATUS_ON * j / LED_FADE_STEPS);
+                    set_individual_led_brightness_internal(k, LED_STATUS_ON * j / LED_FADE_STEPS);
                 }
             }
             k_msleep(step_delay);
@@ -160,7 +160,7 @@ void smooth_blink_leds(uint8_t led_mask, int count, uint32_t duration_ms) {
             for (int k = 0; k < LED_COUNT; k++) {
                 if (led_mask & (1 << (LED_COUNT - 1 - k))) {
                     uint8_t current_brightness = get_led_brightness(k);
-                    set_individual_led_brightness(k, current_brightness * j / LED_FADE_STEPS);
+                    set_individual_led_brightness_internal(k, current_brightness * j / LED_FADE_STEPS);
                 }
             }
             k_msleep(step_delay);
