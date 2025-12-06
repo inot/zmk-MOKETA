@@ -57,8 +57,8 @@ struct Led {
 };
 
 // Layer indices (keep in sync with keymap: DEF=0, LWR=1, RSE=2)
-#define LAYER_LOWER 1
-#define LAYER_RAISE 2
+#define LAYER_LOWER 3
+#define LAYER_RAISE 4
 
 // Enumeration for LEDs
 typedef enum {

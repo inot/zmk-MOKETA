@@ -6,9 +6,10 @@
 #include <dt-bindings/zmk/rgb.h>
 
 #define DEF 0
-#define LWR 1
-#define RSE 2
-#define ADJ 3
+#define WOW 1
+#define FPS 2
+#define LWR 3
+#define RSE 4
 
 / {
 };
@@ -49,12 +50,40 @@
         // -----------------------------|LCTRL | RSE  |  SPACE    | ENT/SHIFT | LWR   |BKSPC |------------------------------
         default_layer {
             bindings = <
-            &kp ESC  &kp Q  &kp W    &kp E    &kp R      &kp T                               &kp Y      &kp U         &kp I     &kp O     &kp P     &mo ADJ
+            &kp ESC  &kp Q  &kp W    &kp E    &kp R      &kp T                               &kp Y      &kp U         &kp I     &kp O     &kp P     &kp LALT
             &kp TAB  &kp A  &kp S    &kp D    &kp F      &kp G                               &kp H      &kp J         &kp K     &kp L     &kp SEMI  &kp LBKT
             &kp LGUI &kp Z  &kp X    &kp C    &kp V      &kp B                               &kp N      &kp M         &kp COMMA &kp DOT   &kp FSLH  &kp SQT
                                               &kp LCTRL  &mo RSE   &kp SPACE &mt RSHFT ENTER &mo LWR    &kp BACKSPACE
             >;
         };
+        wow {
+            // ---------------------------------------------------------------------------------------------------------------
+            // |  ESC  |  Q   |  W   |  E   |  R   |  T     |-------|-------|   Y   |  U    |  I   |  O   |   P   |  [       |
+            // | TAB   |  A   |  S   |  D   |  F   |  G     |-------|-------|   H   |  J    |  K   |  L   |   ;   |  '       |
+            // | SHIFT |  Z   |  X   |  C   |  V   |  B     |-------|-------|   N   |  M    |  ,   |  .   |   /   | ENT/SHIFT|
+            // -----------------------------|  9   |  7     | SPACE | ENTER | LOWER |BKSPACE|---------------------------------
+            bindings = <
+                &kp ESC    &kp Q  &kp W    &kp E    &kp R      &kp T                               &kp Y      &kp U          &kp I     &kp O     &kp P     &kp LBKT
+                &kp TAB    &kp A  &kp S    &kp D    &kp F      &kp G                               &kp H      &kp J          &kp K     &kp L     &kp SEMI  &kp SQT
+                &kp LSHFT  &kp Z  &kp X    &kp C    &kp V      &kp B                               &kp N      &kp M          &kp COMMA &kp DOT   &kp FSLH  &mt RSHFT ENTER
+                                                    &kp N9     &kp N7 &kp SPACE    &mt RSHFT ENTER &mo LOWER  &kp BACKSPACE
+            >;
+        };        
+        
+
+        fps {
+            // ---------------------------------------------------------------------------------------------------------------
+            // |  ESC  |  Q   |  W   |  E   |  R   |  T     |-------|-------|   Y   |  U    |  I   |  O   |   P   |  [       |
+            // | TAB   |  A   |  S   |  D   |  F   |  G     |-------|-------|   H   |  J    |  K   |  L   |   ;   |  '       |
+            // | SHIFT |  Z   |  X   |  C   |  V   |  B     |-------|-------|   N   |  M    |  ,   |  .   |   /   | ENT/SHIFT|
+            // -----------------------------|  M   |  LCTRL | SPACE | ENTER | LOWER |  LALT |---------------------------------
+            bindings = <
+                &kp ESC   &kp Q  &kp W    &kp E    &kp R      &kp T                           &kp Y      &kp U          &kp I     &kp O     &kp P     &kp LBKT
+                &kp TAB   &kp A  &kp S    &kp D    &kp F      &kp G                           &kp H      &kp J          &kp K     &kp L     &kp SEMI  &kp SQT
+                &kp LSHFT &kp Z  &kp X    &kp C    &kp V      &kp B                           &kp N      &kp M          &kp COMMA &kp DOT   &kp FSLH  &mt RSHFT ENTER
+                                                   &kp M      &mo LCTRL &kp SPACE &kp ENTER   &mo LOWER  &kp F1
+            >;
+        }; 
 
         // ---------------------------------------------------------------------------------------------------------------------------------------
         // |OUT_TG   |   BT0   |   BT1   |   BT2   |  BT3    | BT_CLR    |-----------|-----------| PG_UP |LGUI(TAB)|  UP  |       |      |      |
@@ -71,13 +100,13 @@
         };
 
         // --------------------------------------------------------------------------------------------------------------------------
-        // |ESC/BT|  F1    |  F2    |  F3    |  F4    |  F5    |-------|-------|  F6    |  F7    |  F8    |  F9    |  F10   |       |
+        // |ESC/BT|  F1    |  F2    |  F3    |  F3    |  F5    |-------|-------|  F6    |  F7    |  F8    |  F9    |  F10   |       |
         // |  F12 |   1    |   2    |   3    |   4    |   5    |-------|-------|   6    |   7    |   8    |   9    |   0    |  F11  |
         // |      |   =    |  -/_   |   +    |   {    |   }    |-------|-------|   [    |   ]    | VOL-   | VOL+   |   \    |  `    |
         // ----------------------------------|  LALT  |        |       |       |        |        |-----------------------------------
         raise_layer {
             bindings = <
-            &boot_esc ESC 0   &kp F1    &kp F2           &kp F3   &kp F4     &kp F5                  &kp F6     &kp F7    &kp F8       &kp F9         &kp F10       &trans
+            &boot_esc 0 ESC   &kp F1    &kp F2           &kp F3   &kp F4     &kp F5                  &kp F6     &kp F7    &kp F8       &kp F9         &kp F10       &trans
             &kp F12           &kp N1    &kp N2           &kp N3   &kp N4     &kp N5                  &kp N6     &kp N7    &kp N8       &kp N9         &kp N0        &kp F11
             &trans            &kp EQUAL &mt UNDER MINUS  &kp PLUS &kp LBRC   &kp RBRC                &kp LBKT   &kp RBKT  &kp C_VOL_DN &kp C_VOL_UP   &kp BACKSLASH &kp GRAVE 
                                                            &kp LALT   &trans  &trans   &trans &trans     &trans    
@@ -89,13 +118,13 @@
         // |BT_CLR_A| BT_CLR | BT1    |  BT2    |         |         |-----------|-----------|         |         | BT2     | BT1    | BT0    | BT_CLR  |
         // | RGB TG | RGB BRD| RGB BRI| RGB SAD | RGB SAI | RGB HUD |-----------|-----------| RGB HUI | RGB SPD | RGB SPI | RGB EFR| RGB EFF| RGB TG  |
         // |        |        |        |         |         |         |           |           |         |         |         |        |        |         |
-        adjust_layer {
-            bindings = <
-            &studio_unlock   &sys_reset       &bootloader      &out OUT_TOG     &ext_power EP_TOG  &soft_off                        &soft_off        &ext_power EP_TOG  &out OUT_TOG     &bootloader      &sys_reset       &studio_unlock
-            &bt BT_CLR_ALL   &bt BT_CLR       &bt BT_SEL 1     &bt BT_SEL 2     &none              &none                            &none            &none              &bt BT_SEL 2     &bt BT_SEL 1     &bt BT_SEL 0     &bt BT_CLR
-            &rgb_ug RGB_TOG  &rgb_ug RGB_BRD  &rgb_ug RGB_BRI  &rgb_ug RGB_SAD  &rgb_ug RGB_SAI    &rgb_ug RGB_HUD                  &rgb_ug RGB_HUI  &rgb_ug RGB_SPD    &rgb_ug RGB_SPI  &rgb_ug RGB_EFR  &rgb_ug RGB_EFF  &rgb_ug RGB_TOG
-                                                                                &trans             &none            &trans  &trans  &none            &trans
-            >;
-        };
+        // adjust_layer {
+        //     bindings = <
+        //     &studio_unlock   &sys_reset       &bootloader      &out OUT_TOG     &ext_power EP_TOG  &soft_off                        &soft_off        &ext_power EP_TOG  &out OUT_TOG     &bootloader      &sys_reset       &studio_unlock
+        //     &bt BT_CLR_ALL   &bt BT_CLR       &bt BT_SEL 1     &bt BT_SEL 2     &none              &none                            &none            &none              &bt BT_SEL 2     &bt BT_SEL 1     &bt BT_SEL 0     &bt BT_CLR
+        //     &rgb_ug RGB_TOG  &rgb_ug RGB_BRD  &rgb_ug RGB_BRI  &rgb_ug RGB_SAD  &rgb_ug RGB_SAI    &rgb_ug RGB_HUD                  &rgb_ug RGB_HUI  &rgb_ug RGB_SPD    &rgb_ug RGB_SPI  &rgb_ug RGB_EFR  &rgb_ug RGB_EFF  &rgb_ug RGB_TOG
+        //                                                                         &trans             &none            &trans  &trans  &none            &trans
+        //     >;
+        // };
     };
 };
