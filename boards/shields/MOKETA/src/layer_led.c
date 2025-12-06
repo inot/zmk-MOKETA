@@ -31,10 +31,8 @@ static const struct device *rgb_dev = DEVICE_DT_GET(DT_CHOSEN(zmk_underglow));
 #define LED_K_INDEX 2  // Тестовый индекс светодиода
 #define LED_L_INDEX 3  // Тестовый индекс светодиода
 #define RGB_AVAILABLE 1
-LOG_INF("RGB device is available");
 #else
 #define RGB_AVAILABLE 0
-LOG_INF("RGB device is not available");
 #endif
 
 #if RGB_AVAILABLE
@@ -53,6 +51,11 @@ static void init_rgb_device(void) {
         LOG_ERR("RGB device pointer is NULL");
     }
 }
+#else
+static void init_rgb_device(void) {
+    LOG_INF("RGB device is not available");
+}
+#endif
 
 static void set_rgb_led_color(uint32_t led_index, uint8_t r, uint8_t g, uint8_t b) {
     LOG_DBG("set_rgb_led_color called: led_index=%d, r=%d, g=%d, b=%d", led_index, r, g, b);
@@ -99,13 +102,7 @@ static void turn_on_rgb_leds_for_lwr_layer(bool lwr_active) {
 
 void update_layer_leds(void) {
     LOG_DBG("update_layer_leds called");
-#if RGB_AVAILABLE
-    static bool initialized = false;
-    if (!initialized) {
-        init_rgb_device();
-        initialized = true;
-    }
-#endif
+    init_rgb_device();
 
     bool wow_active = zmk_keymap_layer_active(LAYER_WOW);
     bool fps_active = zmk_keymap_layer_active(LAYER_FPS);

@@ -65,9 +65,6 @@ int LAYER_LOWER = 3;
 int LAYER_RAISE = 4;
 int LAYER_LWR = 3;
 
-#include <zephyr/logging/log.h>
-LOG_MODULE_DECLARE(zmk, CONFIG_ZMK_LOG_LEVEL);
-
 // Enumeration for LEDs
 typedef enum {
     LED_1,
