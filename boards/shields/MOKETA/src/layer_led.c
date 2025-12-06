@@ -16,6 +16,9 @@ struct Led {
 extern struct Led individual_leds[];
 extern void set_individual_led_brightness(int led, uint8_t brightness);
 
+// Forward declaration of layer_state_listener
+extern int layer_state_listener(const zmk_event_t *eh);
+
 // Layer indices (keep in sync with keymap: WOW=1, FPS=2, LWR=3, RSE=4)
 extern int LAYER_WOW;
 extern int LAYER_FPS;
@@ -147,5 +150,3 @@ void update_layer_leds(void) {
 #endif
 
 
-ZMK_LISTENER(layer_led_listener, layer_state_listener)
-ZMK_SUBSCRIPTION(layer_led_listener, zmk_layer_state_changed);
