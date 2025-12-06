@@ -98,28 +98,43 @@ void update_layer_leds(void) {
     // WOW → LED_1
     if (wow_active) {
         set_individual_led_brightness(0, LED_STATUS_ON);
+        LOG_DBG("WOW layer active, turning on LED_1");
     } else {
         set_individual_led_brightness(0, LED_STATUS_OFF);
+        LOG_DBG("WOW layer inactive, turning off LED_1");
     }
 
     // FPS → LED_2
     if (fps_active) {
         set_individual_led_brightness(1, LED_STATUS_ON);
+        LOG_DBG("FPS layer active, turning on LED_2");
     } else {
         set_individual_led_brightness(1, LED_STATUS_OFF);
+        LOG_DBG("FPS layer inactive, turning off LED_2");
+    }
+
+    // LWR → LED_3
+    if (lwr_active) {
+        set_individual_led_brightness(2, LED_STATUS_ON);
+        LOG_DBG("LWR layer active, turning on LED_3");
+    } else {
+        set_individual_led_brightness(2, LED_STATUS_OFF);
+        LOG_DBG("LWR layer inactive, turning off LED_3");
     }
 
     // RAISE → LED_4
     if (raise_active) {
         set_individual_led_brightness(3, LED_STATUS_ON);
+        LOG_DBG("RAISE layer active, turning on LED_4");
     } else {
         set_individual_led_brightness(3, LED_STATUS_OFF);
+        LOG_DBG("RAISE layer inactive, turning off LED_4");
     }
 
     // LWR layer RGB control
 #if RGB_AVAILABLE
     LOG_DBG("LWR layer active: %d", lwr_active);
-    turn_on_rgb_leds_for_lwr_layer(lwr_active);
+    // turn_on_rgb_leds_for_lwr_layer(lwr_active); // Временно отключено для проверки работы обычных светодиодов
 #endif
 }
 
