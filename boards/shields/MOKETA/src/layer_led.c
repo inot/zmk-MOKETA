@@ -48,7 +48,8 @@ static void set_rgb_led_color(uint32_t led_index, uint8_t r, uint8_t g, uint8_t 
     LOG_DBG("set_rgb_led_color called: led_index=%d, r=%d, g=%d, b=%d", led_index, r, g, b);
     if (rgb_dev && device_is_ready(rgb_dev)) {
         LOG_DBG("Setting LED color");
-        led_set_color(rgb_dev, led_index, r, g, b);
+        uint8_t color[3] = {r, g, b};
+        led_set_color(rgb_dev, led_index, 3, color);
     } else {
         LOG_DBG("RGB device not ready or not available");
     }
