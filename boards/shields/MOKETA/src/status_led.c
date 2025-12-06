@@ -58,11 +58,6 @@ struct Led {
 };
 
 // Layer indices (keep in sync with keymap: WOW=1, FPS=2, LWR=3, RSE=4)
-#define LAYER_WOW 1
-#define LAYER_FPS 2
-#define LAYER_LOWER 3
-#define LAYER_RAISE 4
-
 // Make these available for layer_led.c
 int LAYER_WOW = 1;
 int LAYER_FPS = 2;

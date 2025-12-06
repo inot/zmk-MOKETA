@@ -3,11 +3,7 @@
 #include <zmk/layer_led.h>
 
 // External dependencies from status_led.c
-extern struct Led {
-    const struct device *dev;
-    uint32_t id;
-};
-
+struct Led;
 extern struct Led individual_leds[];
 extern void set_individual_led_brightness(int led, uint8_t brightness);
 
