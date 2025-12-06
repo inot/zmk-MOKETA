@@ -29,10 +29,10 @@ extern int LAYER_LWR;
 // RGB device and LED indices for IJKL keys
 #if DT_NODE_EXISTS(DT_CHOSEN(zmk_underglow))
 static const struct device *rgb_dev = DEVICE_DT_GET(DT_CHOSEN(zmk_underglow));
-#define LED_I_INDEX 0  // Тестовый индекс светодиода
-#define LED_J_INDEX 1  // Тестовый индекс светодиода
-#define LED_K_INDEX 2  // Тестовый индекс светодиода
-#define LED_L_INDEX 3  // Тестовый индекс светодиода
+#define LED_I_INDEX 26  // Индекс светодиода под кнопкой I
+#define LED_J_INDEX 31  // Индекс светодиода под кнопкой J
+#define LED_K_INDEX 32  // Индекс светодиода под кнопкой K
+#define LED_L_INDEX 33  // Индекс светодиода под кнопкой L
 #define RGB_AVAILABLE 1
 #else
 #define RGB_AVAILABLE 0
