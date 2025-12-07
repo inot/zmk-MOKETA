@@ -103,19 +103,4 @@
         zmk,underglow = &led_strip;
 	zmk,backlight = &backlight;
     };
-
-    wakeup: gpio_key_wakeup_trigger {
-        compatible = "zmk,gpio-key-wakeup-trigger";
-        trigger = <&kscan0>;
-        wakeup-source;
-
-        /* Use the same GPIOs as the matrix columns so any keypress can wake from deep sleep */
-        extra-gpios =
-            <&pro_micro 5 GPIO_ACTIVE_HIGH>,
-            <&pro_micro 6 GPIO_ACTIVE_HIGH>,
-            <&pro_micro 7 GPIO_ACTIVE_HIGH>,
-            <&pro_micro 18 GPIO_ACTIVE_HIGH>,
-            <&pro_micro 15 GPIO_ACTIVE_HIGH>,
-            <&pro_micro 14 GPIO_ACTIVE_HIGH>;
-    };
 };
