@@ -11,6 +11,12 @@
 #define LWR 3
 #define RSE 4
 
+
+&mt {
+    flavor = "tap-preferred";
+    tapping-term-ms = <140>;
+};
+
 / {
 };
 
